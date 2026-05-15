@@ -37,7 +37,11 @@ int main(void)
 	al_init_font_addon();
 	al_init_ttf_addon();
 
+	ALLEGRO_FONT* font25 = al_load_font("bold.ttf", 24, 0);
 	ALLEGRO_FONT* font24 = al_load_font("AppleGaramond.ttf", 24, 0);
+	ALLEGRO_FONT* font26 = al_load_font("Rubik.ttf", 24, 0);
+	ALLEGRO_FONT* font27 = al_load_font("Nobile.ttf", 24, 0);
+
 	event_queue = al_create_event_queue();
 
 
@@ -77,7 +81,7 @@ int main(void)
 			//UPPER LEFT QUADRANT
 			if (pos_x <= 420 && pos_x >= 0 && pos_y >= 0 && pos_y <= 300) {
 				al_clear_to_color(al_map_rgb(255, 255, 255));
-				al_draw_textf(font24, al_map_rgb(0, 0, 0), pos_x, pos_y, ALLEGRO_ALIGN_LEFT, "Hi! The mouse is located at = %i / %i", pos_x, pos_y);
+				al_draw_textf(font25, al_map_rgb(0, 0, 0), pos_x, pos_y, ALLEGRO_ALIGN_LEFT, "The mouse is located at = %i / %i", pos_x, pos_y);
 				al_draw_filled_circle(pos_x, pos_y, circle_radius, circle_color);
 				al_flip_display();
 			}
@@ -85,13 +89,13 @@ int main(void)
 			else if (pos_x >= 400 && pos_x <= 800 && pos_y >= 300 && pos_y <= 600) {
 				al_clear_to_color(al_map_rgb(255, 255, 0));
 				al_draw_filled_circle(pos_x, pos_y, circle_radius, circle_color);
-				al_draw_textf(font24, al_map_rgb(0,0,255), pos_x, pos_y, ALLEGRO_ALIGN_LEFT, "The mouse is located at = %i / %i", pos_x, pos_y);
+				al_draw_textf(font26, al_map_rgb(0,0,255), pos_x, pos_y, ALLEGRO_ALIGN_LEFT, "The mouse is located at = %i / %i", pos_x, pos_y);
 				al_flip_display();
 			}
 			else if (pos_x >= 400 && pos_x <= 800 && pos_y >= 0 && pos_y <= 300) {
 				//UPPER RIGHT QUADRANT
 				al_draw_filled_circle(pos_x, pos_y, circle_radius, circle_color);
-				al_draw_textf(font24, al_map_rgb(255, 255, 255), pos_x, pos_y, ALLEGRO_ALIGN_LEFT, "The mouse is located at = %i / %i", pos_x, pos_y);
+				al_draw_textf(font27, al_map_rgb(255, 255, 255), pos_x, pos_y, ALLEGRO_ALIGN_LEFT, "The mouse is located at = %i / %i", pos_x, pos_y);
 				al_flip_display();
 			}
 			//BOTTOM LEFT
