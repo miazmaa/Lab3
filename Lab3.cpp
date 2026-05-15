@@ -22,7 +22,7 @@ int main(void)
 		al_show_native_message_box(Screen, "Error!", "Failed to create the display.", 0, 0, ALLEGRO_MESSAGEBOX_ERROR);
 		return -1;
 	}
-
+	//variables to be used for mouse position on screen, defining circle size and color, and the program runtime
 	bool draw = false, done = false;;
 	int pos_x = width / 2;
 	int pos_y = height / 2;
@@ -32,18 +32,18 @@ int main(void)
 
 	ALLEGRO_EVENT_QUEUE* event_queue = NULL;
 
-
+	//add-ons used
 	al_init_primitives_addon();
 	al_init_font_addon();
 	al_init_ttf_addon();
 
-	ALLEGRO_FONT* font25 = al_load_font("bold.ttf", 24, 0);
-	ALLEGRO_FONT* font24 = al_load_font("AppleGaramond.ttf", 24, 0);
-	ALLEGRO_FONT* font26 = al_load_font("Rubik.ttf", 24, 0);
-	ALLEGRO_FONT* font27 = al_load_font("Nobile.ttf", 24, 0);
+	//fonts used for the 4 quadrants
+	ALLEGRO_FONT* appleFont = al_load_font("AppleGaramond.ttf", 24, 0);
+	ALLEGRO_FONT* boldFont = al_load_font("bold.ttf", 24, 0);
+	ALLEGRO_FONT* rubikFont = al_load_font("Rubik.ttf", 24, 0);
+	ALLEGRO_FONT* nobileFont = al_load_font("Nobile.ttf", 24, 0);
 
 	event_queue = al_create_event_queue();
-
 
 	al_register_event_source(event_queue, al_get_display_event_source(Screen));
 	al_clear_to_color(al_map_rgb(0, 0, 0));
@@ -55,8 +55,6 @@ int main(void)
 
 	al_register_event_source(event_queue, al_get_mouse_event_source());
 
-	//al_hide_mouse_cursor(display);
-
 	while (!done)
 	{
 		ALLEGRO_EVENT ev;
@@ -67,6 +65,7 @@ int main(void)
 		}
 		else if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN)
 		{
+			//saves mouse positions on screen when held down
 			if (ev.mouse.button & 1)
 			{
 				draw = true;
@@ -78,31 +77,31 @@ int main(void)
 
 		if (draw)
 		{
-			//UPPER LEFT QUADRANT
+			//conditions for upper left quadrant
 			if (pos_x <= 420 && pos_x >= 0 && pos_y >= 0 && pos_y <= 300) {
 				al_clear_to_color(al_map_rgb(255, 255, 255));
-				al_draw_textf(font25, al_map_rgb(0, 0, 0), pos_x, pos_y, ALLEGRO_ALIGN_LEFT, "The mouse is located at = %i / %i", pos_x, pos_y);
+				al_draw_textf(boldFont, al_map_rgb(0, 0, 0), pos_x, pos_y, ALLEGRO_ALIGN_LEFT, "The mouse is located at = %i / %i", pos_x, pos_y);
 				al_draw_filled_circle(pos_x, pos_y, circle_radius, circle_color);
 				al_flip_display();
 			}
-			//BOTTOM RIGHT
+			//conditions for bottom right quadrant
 			else if (pos_x >= 400 && pos_x <= 800 && pos_y >= 300 && pos_y <= 600) {
 				al_clear_to_color(al_map_rgb(255, 255, 0));
 				al_draw_filled_circle(pos_x, pos_y, circle_radius, circle_color);
-				al_draw_textf(font26, al_map_rgb(0,0,255), pos_x, pos_y, ALLEGRO_ALIGN_LEFT, "The mouse is located at = %i / %i", pos_x, pos_y);
+				al_draw_textf(rubikFont, al_map_rgb(0,0,255), pos_x, pos_y, ALLEGRO_ALIGN_LEFT, "The mouse is located at = %i / %i", pos_x, pos_y);
 				al_flip_display();
 			}
+			//conditions for upper right quadrant
 			else if (pos_x >= 400 && pos_x <= 800 && pos_y >= 0 && pos_y <= 300) {
-				//UPPER RIGHT QUADRANT
 				al_draw_filled_circle(pos_x, pos_y, circle_radius, circle_color);
-				al_draw_textf(font27, al_map_rgb(255, 255, 255), pos_x, pos_y, ALLEGRO_ALIGN_LEFT, "The mouse is located at = %i / %i", pos_x, pos_y);
+				al_draw_textf(nobileFont, al_map_rgb(255, 255, 255), pos_x, pos_y, ALLEGRO_ALIGN_LEFT, "The mouse is located at = %i / %i", pos_x, pos_y);
 				al_flip_display();
 			}
-			//BOTTOM LEFT
+			//conditions for bottom left quadrant
 			else if (pos_x >= 0 && pos_x <= 400 && pos_y >= 300 && pos_y <= 600) {
 				al_clear_to_color(al_map_rgb(0, 0, 255));
 				al_draw_filled_circle(pos_x, pos_y, circle_radius, circle_color);
-				al_draw_textf(font24, al_map_rgb(255,255,0), pos_x, pos_y, ALLEGRO_ALIGN_LEFT, "The mouse is located at = %i / %i", pos_x, pos_y);
+				al_draw_textf(appleFont, al_map_rgb(255,255,0), pos_x, pos_y, ALLEGRO_ALIGN_LEFT, "The mouse is located at = %i / %i", pos_x, pos_y);
 				al_flip_display();
 			}
 
